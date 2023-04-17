@@ -18,8 +18,8 @@ const filterSlice = createSlice({
 
       state.filteredProducts = tempProducts;
     },
-    SORT_PRODUCTS(state, action: any) {
-      const { products, sort } = action.payload;
+    SORT_PRODUCTS(state, action) {
+      const { products, sort }: any = action.payload;
       let tempProducts = [];
       if (sort === "latest") {
         tempProducts = products;

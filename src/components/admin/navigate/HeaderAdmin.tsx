@@ -23,8 +23,7 @@ function HeaderAdmin({ drawerWidth }: HeaderAdminProps) {
   const dispatch = useDispatch()
 
   const { displayName } = useInitAuthSlice()
-  const { logout } = useLogoutUser()
-  const navigate = useNavigate()
+
 
   return (
     <Box sx={{ display: 'flex' }}>

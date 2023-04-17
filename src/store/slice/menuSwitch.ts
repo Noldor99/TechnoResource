@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
-  isOpenMenu: true,
+  isOpenMenu: false,
 };
 
 export const menuSwitchSlice = createSlice({

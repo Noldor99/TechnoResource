@@ -9,8 +9,7 @@ const ThemeSwitcher: FC = (): JSX.Element => {
 
 
   return (
-    <Grid onClick={colorMode.toggleColorMode} sx={{
-    }}>
+    <Grid onClick={colorMode.toggleColorMode}>
       <IconButton sx={{ marginLeft: '5px', marginRight: '25px' }}>
         {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
       </IconButton>
