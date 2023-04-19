@@ -5,13 +5,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
-
-
-import { useNavigate } from 'react-router-dom';
-import { useInitAuthSlice, useLogoutUser } from '../../../hook/useAuth';
+import { useInitAuthSlice } from '../../../hook/useAuth';
 import { ShowOnMobile } from '../../../hook/useMenuDisply';
-import { SWITCH_MENU } from '../../../store/slice/menuSwitch';
-import AppBarThema from '../../styleComponents/AppBarThema';
+import { SWITCH_MENU } from '../../../store/slice/booleanSlice';
+import AppBarThema from '../../styleComponents/containers/AppBarThema';
 import ThemeSwitcher from '../../ThemeSwitcher';
 
 interface HeaderAdminProps {

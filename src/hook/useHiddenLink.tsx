@@ -12,7 +12,6 @@ export const ShowOnLogin = ({ children }: any) => {
 
 export const ShowOnLogout = ({ children }: any) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  console.log(isLoggedIn)
   if (!isLoggedIn) {
     return children;
   }

@@ -1,15 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./slice/authSlice";
-import menuSwitchSlice from "./slice/menuSwitch";
+import booleanSlice from "./slice/booleanSlice";
+import menuSwitchSlice from "./slice/booleanSlice";
 import productReducer from "./slice/productSlice";
 import filterReducer from "./slice/filterSlice";
 import cartReducer from "./slice/cartSlice";
 import checkoutReducer from "./slice/checkoutSlice";
 import orderReducer from "./slice/orderSlice";
+import authSlice from "./slice/authSlice";
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
+    boolean: booleanSlice,
     menuSwitch: menuSwitchSlice,
     product: productReducer,
     filter: filterReducer,
@@ -17,6 +19,10 @@ const store = configureStore({
     checkout: checkoutReducer,
     orders: orderReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -1,11 +1,11 @@
 import { Toolbar, Divider, List, ListItem, ListItemIcon, ListItemText, Box, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { selectIsOpenMenu, SWITCH_MENU } from '../store/slice/menuSwitch';
+import { selectIsOpenMenu, SWITCH_MENU } from '../store/slice/booleanSlice';
 import { useAppSelector } from '../hook';
 import { navMenuUser } from '../common/moks/navigate';
-import ListItemButtonStyled from './styleComponents/ListItemButtonStyled';
+import ListItemButtonBlue from './styleComponents/buttons/ListItemButtonBlue';
 import { useNavigate } from 'react-router-dom';
-import DrawerThema from './styleComponents/DrawerThema';
+import DrawerThema from './styleComponents/containers/DrawerThema';
 import { AdminPanelSettingsOutlined, LogoutOutlined } from '@mui/icons-material';
 import { ShowOnLogout, ShowOnLogin } from '../hook/useHiddenLink';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
@@ -13,6 +13,8 @@ import { useLogoutUser } from '../hook/useAuth';
 import SearchBarComponent from './SearchBarComponent';
 //@ts-ignore
 import Logo from '../assets/images/sidebar/logo.svg'
+import { BASE_URL } from '../URL';
+import MyLogo from './MyLogo';
 
 const drawerWidth = 240;
 
@@ -35,12 +37,12 @@ const DrawerComponent = (props: Props) => {
   const renderNavMenu = navMenuUser.map((element): JSX.Element => {
     return (
       <ListItem key={element.id}>
-        <ListItemButtonStyled onClick={() => navigate(`${element.path}`)}>
+        <ListItemButtonBlue onClick={() => navigate(`${element.path}`)}>
           <ListItemIcon>{element.icon}</ListItemIcon>
           <ListItemText>
             <Typography variant="body1">{element.name}</Typography>
           </ListItemText>
-        </ListItemButtonStyled>
+        </ListItemButtonBlue>
       </ListItem>
     )
   })
@@ -49,12 +51,7 @@ const DrawerComponent = (props: Props) => {
     <div>
       <List>
         <ListItem>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src={Logo} alt="Logo" />
-            <Typography variant="h1">
-              Demo
-            </Typography>
-          </Box>
+          <MyLogo />
         </ListItem>
       </List>
       <Divider />
@@ -70,36 +67,36 @@ const DrawerComponent = (props: Props) => {
       <List>
         <ShowOnLogout>
           <ListItem>
-            <ListItemButtonStyled onClick={() => navigate('/login')}>
+            <ListItemButtonBlue onClick={() => navigate(`${BASE_URL}login`)}>
               <ListItemIcon>
                 <LockOpenIcon />
               </ListItemIcon>
               <ListItemText>
                 <Typography>Login</Typography>
               </ListItemText>
-            </ListItemButtonStyled>
+            </ListItemButtonBlue>
           </ListItem>
         </ShowOnLogout>
         <ListItem>
-          <ListItemButtonStyled onClick={() => navigate('admin')}>
+          <ListItemButtonBlue onClick={() => navigate('admin')}>
             <ListItemIcon>
               <AdminPanelSettingsOutlined />
             </ListItemIcon>
             <ListItemText>
               <Typography>Admin</Typography>
             </ListItemText>
-          </ListItemButtonStyled>
+          </ListItemButtonBlue>
         </ListItem>
         <ShowOnLogin>
           <ListItem>
-            <ListItemButtonStyled onClick={logout}>
+            <ListItemButtonBlue onClick={logout}>
               <ListItemIcon>
                 <LogoutOutlined />
               </ListItemIcon>
               <ListItemText>
                 <Typography>Logout</Typography>
               </ListItemText>
-            </ListItemButtonStyled>
+            </ListItemButtonBlue>
           </ListItem>
         </ShowOnLogin>
       </List>

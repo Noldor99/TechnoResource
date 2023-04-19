@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../firebase/config";
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "../store/slice/authSlice";
+import { BASE_URL } from "../URL";
 
 export const useInitAuthSlice = () => {
   const [displayName, setdisplayName] = useState("");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // Monitor currently sign in user
   useEffect(() => {
@@ -50,7 +50,7 @@ export const useLogoutUser = () => {
     signOut(auth)
       .then(() => {
         toast.success("Logout successfully.");
-        navigate("/");
+        navigate(`${BASE_URL}`);
       })
       .catch((error) => {
         toast.error(error.message);

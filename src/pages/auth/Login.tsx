@@ -20,15 +20,13 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 // import { selectPreviousURL } from '../../store/slice/cartSlice';
 import GoogleIcon from '@mui/icons-material/Google';
-import ButtonAuthThema from '../../components/styleComponents/ButtonAuthThema';
+import ButtonBlueBack from '../../components/styleComponents/buttons/ButtonBlueBack';
+import { BASE_URL } from '../../URL';
+import PaperRounding from '../../components/styleComponents/containers/PaperRounding';
+import TextFieldForm from '../../components/styleComponents/TextFieldForm';
+
 
 const LoginForm = () => {
-
-  const StyledTextField = styled(TextField)(({ theme }) => ({
-    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      '-webkit-box-shadow': '0 0 0 100px #000000 inset',
-    },
-  }));
 
 
   const [email, setEmail] = useState('');
@@ -42,7 +40,7 @@ const LoginForm = () => {
     // if (previousURL.includes('cart')) {
     //   return navigate('/cart');
     // }
-    navigate('/');
+    navigate(`${BASE_URL}`);
   };
 
   const loginUser = (e: any) => {
@@ -78,85 +76,86 @@ const LoginForm = () => {
 
   return (
     <Container
+      maxWidth="xs"
       sx={{
-        height: '100vh',
+        height: '90vh',
+        marginTop: 8,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '600px'
-
+        justifyContent: 'center'
       }}
     >
-
-      <FormControl
-        component="form"
-        noValidate
-        onSubmit={loginUser}
-        sx={{
-          p: 2,
-          width: '100%',
-          boxShadow: '0px 0px 8px 0px rgba(0,0,0,0.2)'
-        }}
-      >
-        <Typography component="h1" variant="h5" color="orange" align="center">
-          Login
-        </Typography>
-        <StyledTextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-
-        />
-        <StyledTextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <Typography variant="body2" color="textSecondary">
-          <Button color="info" onClick={() => navigate('/reset')}>
-            Reset Password
-          </Button>
-        </Typography>
-        <ButtonAuthThema
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          sx={{ mt: 3, mb: 2 }}
+      <PaperRounding sx={{ width: '100%' }}>
+        <FormControl
+          component="form"
+          noValidate
+          onSubmit={loginUser}
+          sx={{
+            p: 2,
+            width: '100%',
+          }}
         >
-          Log In
-        </ButtonAuthThema>
-        <Button
-          fullWidth
-          variant="contained"
-          color="secondary"
-          startIcon={<GoogleIcon />}
-          sx={{ mb: 2 }}
-          onClick={signInWithGoogle}
-        >
-          Login with Google
-        </Button>
-        <Typography variant="body2" color="textSecondary" align="center">
-          Don't have an account?{' '}
-          <Button color="info" onClick={() => navigate('/register')}>
-            Register
+          <Typography component="h1" variant="h5" color="orange" align="center">
+            Login
+          </Typography>
+          <TextFieldForm
+            margin="normal"
+            required
+            fullWidth
+            autoComplete="on"
+            id="email"
+            label="Email Address"
+            name="email"
+            // autoComplete="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+
+          />
+          <TextFieldForm
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+          <Typography variant="body2" color="textSecondary">
+            <Button color="info" onClick={() => navigate(`${BASE_URL}/reset`)}>
+              Reset Password
+            </Button>
+          </Typography>
+          <ButtonBlueBack
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Log In
+          </ButtonBlueBack>
+          <Button
+            fullWidth
+            variant="contained"
+            color="secondary"
+            startIcon={<GoogleIcon />}
+            sx={{ mb: 2 }}
+            onClick={signInWithGoogle}
+          >
+            Login with Google
           </Button>
-        </Typography>
-      </FormControl>
+          <Typography variant="body2" color="textSecondary" align="center">
+            Don't have an account?{' '}
+            <Button color="info" onClick={() => navigate(`${BASE_URL}/register`)}>
+              Register
+            </Button>
+          </Typography>
+        </FormControl>
+      </PaperRounding>
     </Container>
   );
 };

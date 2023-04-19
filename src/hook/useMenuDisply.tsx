@@ -1,9 +1,11 @@
+import { useTheme } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
 
 
 export const ShowOnDesktop = ({ children }: any) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const isNonMobile = useMediaQuery('(min-width:960px)')
+  const theme = useTheme();
+  //@ts-ignore
+  const isNonMobile = useMediaQuery(theme.breakpoints.up('md'));
 
   if (isNonMobile) {
     return children;
@@ -12,8 +14,9 @@ export const ShowOnDesktop = ({ children }: any) => {
 };
 
 export const ShowOnMobile = ({ children }: any) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const isNonMobile = useMediaQuery('(min-width:960px)')
+  const theme = useTheme();
+  //@ts-ignore
+  const isNonMobile = useMediaQuery(theme.breakpoints.up('md'));
 
   if (!isNonMobile) {
     return children;

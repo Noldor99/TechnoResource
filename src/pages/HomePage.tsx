@@ -1,46 +1,48 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
+import React, { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
 import ConstructionIcon from '@mui/icons-material/Construction';
-import DrawerThema from '../components/styleComponents/DrawerThema';
-import ToolBarThema from '../components/styleComponents/ToolBarThema';
-import ProductList from '../components/product/productList/ProductList';
+import ProductList from '../components/product/ProductList';
 import { useSelector, useDispatch } from 'react-redux';
 import useFetchCollection from '../customHooks/useFetchCollection';
 import { selectProducts, STORE_PRODUCTS, GET_PRICE_RANGE } from '../store/slice/productSlice';
+import ProductFilter from '../components/product/ProductFilter';
+import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import SearchBarComponent from '../components/SearchBarComponent';
+import MuiListAltIcon from '@mui/icons-material/ListAlt';
+import WindowIcon from '@mui/icons-material/Window';
+import { FILTER_BY_SEARCH, selectFilteredProducts, SORT_PRODUCTS } from "../store/slice/filterSlice";
+import { ShowOnDesktop } from "../hook/useMenuDisply";
+import PaperSharp from "../components/styleComponents/containers/PaperSharp";
 
 const drawerWidth = 240;
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-}
 
-const HomePage = (props: Props) => {
-  const { window } = props;
+
+const HomePage = () => {
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const { data, isLoading } = useFetchCollection("products");
+  const filteredProducts = useSelector(selectFilteredProducts);
 
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
+
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState<any>("latest");
+  const [grid, setGrid] = useState<any>(true);
+
+
+  useEffect(() => {
+    dispatch(SORT_PRODUCTS({ products, sort }));
+  }, [dispatch, products, sort]);
+
+  useEffect(() => {
+    dispatch(FILTER_BY_SEARCH({ products, search }));
+  }, [dispatch, products, search]);
+
 
   React.useEffect(() => {
     dispatch(
@@ -60,108 +62,90 @@ const HomePage = (props: Props) => {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Toolbar />
-      <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      <CssBaseline />
-      <ToolBarThema
-        position='static'
+      <PaperSharp
         sx={{
+          padding: 2,
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
-
         }}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
+        <Grid container spacing={2}  >
+          <Grid item xs={6} sm={6}>
+            <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+              <ShowOnDesktop>
+                <IconButton onClick={() => setGrid(!grid)}>
+                  {grid ? <MuiListAltIcon /> : <WindowIcon />}
+                </IconButton>
+              </ShowOnDesktop>
+              <Typography>
+                <b>{filteredProducts.length}</b> Products found.
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={6} md={3}
+            display="flex"
+            justifyContent="end"
           >
-            <ConstructionIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </ToolBarThema>
-      <Box
-        component="nav"
-        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <DrawerThema
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </DrawerThema>
-        <DrawerThema
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', md: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, zIndex: '-1' },
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { md: 'none' } }}
+            >
+              <ConstructionIcon />
+            </IconButton>
+          </Grid>
 
-          }}
-          open
-        >
-          {drawer}
-        </DrawerThema>
-      </Box>
+          <Grid item sm={6} md={6}>
+
+            <SearchBarComponent value={search} onChange={(e: any) => setSearch(e.target.value)} />
+          </Grid>
+          <Grid item sm={6} md={6}
+            display="flex"
+            justifyContent="end"
+          >
+
+            <FormControl>
+              <InputLabel>Sort by:</InputLabel>
+              <Select
+                sx={{ minWidth: '140px' }}
+                size='small'
+                value={sort}
+                label="Sort by:"
+                onChange={(e) => setSort(e.target.value)}
+              >
+                <MenuItem value="latest">Latest</MenuItem>
+                <MenuItem value="lowest-price">Lowest Price</MenuItem>
+                <MenuItem value="highest-price">Highest Price</MenuItem>
+                <MenuItem value="a-z">A - Z</MenuItem>
+                <MenuItem value="z-a">Z - A</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+
+      </ PaperSharp>
+
       <Box
         component="main"
         sx={{ flexGrow: 1, paddingTop: 3, width: { md: `calc(100% - ${drawerWidth}px)` }, marginLeft: { md: `${drawerWidth}px` } }}
       >
 
-        <ProductList products={products} />
+        <ProductList
+          filteredProducts={filteredProducts}
+          products={products}
+          grid={grid}
+        />
+        <ProductFilter
+          drawerWidth={drawerWidth}
+          mobileOpen={mobileOpen}
+          handleDrawerToggle={handleDrawerToggle} />
       </Box>
-    </Box>
+    </Box >
   );
 }
 

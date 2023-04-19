@@ -4,7 +4,10 @@ import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { Box, Button, Container, FormControl, TextField, Typography } from "@mui/material";
-import ButtonAuthThema from "../../components/styleComponents/ButtonAuthThema";
+import ButtonBlueBack from "../../components/styleComponents/buttons/ButtonBlueBack";
+import { BASE_URL } from "../../URL";
+import PaperRounding from "../../components/styleComponents/containers/PaperRounding";
+import TextFieldForm from "../../components/styleComponents/TextFieldForm";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +30,7 @@ const Register = () => {
         console.log(user);
         setIsLoading(false);
         toast.success("Registration Successful...");
-        navigate("/login");
+        navigate(`${BASE_URL}/login`);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -48,70 +51,74 @@ const Register = () => {
         justifyContent: 'center'
       }}
     >
-      <FormControl
-        component="form"
-        noValidate
-        onSubmit={registerUser}
-        sx={{
-          p: 2,
-          width: '100%',
-          boxShadow: '0px 0px 8px 0px rgba(0,0,0,0.2)'
-        }}
-      >
-        <Typography component="h1" variant="h5" color='orange' align="center" >
-          Register
-        </Typography>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="new-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="confirmPassword"
-          label="Confirm Password"
-          type="password"
-          id="confirmPassword"
-          autoComplete="new-password"
-          value={cPassword}
-          onChange={(e) => setCPassword(e.target.value)}
-        />
-        <ButtonAuthThema
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          sx={{ mt: 3, mb: 2 }}
+      <PaperRounding sx={{ width: '100%' }}>
+
+
+        <FormControl
+          component="form"
+          noValidate
+          onSubmit={registerUser}
+          sx={{
+            p: 2,
+            width: '100%',
+            boxShadow: '0px 0px 8px 0px rgba(0,0,0,0.2)'
+          }}
         >
-          Register
-        </ButtonAuthThema>
-        <Typography variant="body2" color="textSecondary" align="center">
-          Already have an account?{' '}
-          <Button color="info" onClick={() => navigate('/login')}>
-            Login
-          </Button>
-        </Typography>
-      </FormControl>
+          <Typography component="h1" variant="h5" color='orange' align="center" >
+            Register
+          </Typography>
+          <TextFieldForm
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextFieldForm
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="new-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <TextFieldForm
+            margin="normal"
+            required
+            fullWidth
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            id="confirmPassword"
+            autoComplete="new-password"
+            value={cPassword}
+            onChange={(e) => setCPassword(e.target.value)}
+          />
+          <ButtonBlueBack
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Register
+          </ButtonBlueBack>
+          <Typography variant="body2" color="textSecondary" align="center">
+            Already have an account?{' '}
+            <Button color="info" onClick={() => navigate(`${BASE_URL}/login`)}>
+              Login
+            </Button>
+          </Typography>
+        </FormControl>
+      </PaperRounding>
     </Container>
   );
 };

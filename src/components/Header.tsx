@@ -4,19 +4,25 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useDispatch } from 'react-redux';
-import { SWITCH_MENU } from '../store/slice/menuSwitch';
-import AppBarThema from './styleComponents/AppBarThema';
+import { useDispatch, useSelector } from 'react-redux';
+import { SWITCH_MENU } from '../store/slice/booleanSlice';
+import AppBarThema from './styleComponents/containers/AppBarThema';
 import ThemeSwitcher from './ThemeSwitcher';
 import { useInitAuthSlice, useLogoutUser } from '../hook/useAuth';
-import { Button } from '@mui/material';
+import { Badge, Button } from '@mui/material';
 import { navMenuUser } from '../common/moks/navigate';
 import { ShowOnDesktop, ShowOnMobile } from '../hook/useMenuDisply';
 import { useNavigate } from 'react-router-dom';
-import ButtonNavThema from './styleComponents/ButtonNavThema';
+import ButtonWhite from './styleComponents/buttons/ButtonWhite';
 import { ShowOnLogin, ShowOnLogout } from '../hook/useHiddenLink';
 //@ts-ignore
 import Logo from '../assets/images/sidebar/logo.svg'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { CALCULATE_SUBTOTAL, CALCULATE_TOTAL_QUANTITY, selectCartTotalQuantity } from '../store/slice/cartSlice';
+import FlexBetween from './styleComponents/FlexBetween';
+import { useEffect } from 'react';
+import { BASE_URL } from '../URL';
+import MyLogo from './MyLogo';
 
 function ResponsiveDrawer() {
 
@@ -25,6 +31,14 @@ function ResponsiveDrawer() {
   const { displayName } = useInitAuthSlice()
   const { logout } = useLogoutUser()
   const navigate = useNavigate()
+
+  const CartTotalQuantity = useSelector(selectCartTotalQuantity);
+
+
+  useEffect(() => {
+    dispatch(CALCULATE_SUBTOTAL({}));
+    dispatch(CALCULATE_TOTAL_QUANTITY({}));
+  }, [dispatch]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -44,12 +58,7 @@ function ResponsiveDrawer() {
             </IconButton>
           </ShowOnMobile>
           <ShowOnDesktop>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <img src={Logo} alt="Logo" />
-              <Typography variant="h1">
-                Demo
-              </Typography>
-            </Box>
+            <MyLogo />
           </ShowOnDesktop>
           <ShowOnDesktop>
             <ShowOnLogin>
@@ -61,7 +70,7 @@ function ResponsiveDrawer() {
             </Button>
             <ShowOnLogout>
               <Button variant='outlined' color="success"
-                onClick={() => navigate('/login')}>
+                onClick={() => navigate(`${BASE_URL}/login`)}>
                 Login
               </Button>
             </ShowOnLogout>
@@ -75,18 +84,28 @@ function ResponsiveDrawer() {
           <ShowOnDesktop>
             <Box  >
               {navMenuUser.map((item) => (
-                <ButtonNavThema key={item.id}
+                <ButtonWhite key={item.id}
                   onClick={() => navigate(`${item.path}`)}>
+
                   {item.name}
-                </ButtonNavThema>
+                </ButtonWhite>
               ))}
             </Box>
           </ShowOnDesktop>
-          <ThemeSwitcher />
+          <FlexBetween>
+            <ThemeSwitcher />
+            <IconButton onClick={() => navigate('card')}>
+              <Badge sx={{
+                "& .MuiBadge-badge": { backgroundColor: '#1e8023', color: 'white' }
+              }} badgeContent={CartTotalQuantity}>
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+          </FlexBetween>
         </Toolbar>
       </AppBarThema>
 
-    </Box>
+    </Box >
   );
 }
 

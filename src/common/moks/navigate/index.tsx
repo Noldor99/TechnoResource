@@ -6,69 +6,66 @@ import {
   AddCircleOutlineOutlined,
   TrendingUpOutlined,
 } from '@mui/icons-material';
+import { BASE_URL } from '../../../URL';
+
 
 export const navMenuUser = [
   {
-    name: 'Главная',
+    name: 'Home',
     icon: <HomeOutlined />,
-    path: '/',
+    path: '/TechnoResource',
     id: 1
   },
   {
-    name: 'Избраное',
+    name: 'Likes',
     icon: <AutoGraphOutlined />,
-    path: '/watchlist',
+    path: 'likes',
     id: 2
   },
   {
-    name: 'Новости',
+    name: 'My Orders',
     icon: <MenuBookOutlined />,
-    path: '/news',
+    path: 'myOrders',
     id: 3
   },
   {
-    name: 'Настройки',
+    name: 'Contact',
     icon: <SettingsOutlined />,
-    path: '/settings',
+    path: 'contact',
     id: 4
   },
 ]
 
 export const navMenuAdmin = [
   {
-    name: 'Главная',
+    name: 'Home',
     icon: <HomeOutlined />,
-    path: '/',
+    path: '',
     id: 1
   },
   {
-    name: 'Добавить товар',
+    name: 'Add Product',
     icon: <AddCircleOutlineOutlined />,
     path: 'add-product/ADD',
-    id: 6
-  },
-  {
-    name: 'Все товары',
-    icon: <TrendingUpOutlined />,
-    path: 'all-products',
-    id: 5
-  },
-  {
-    name: 'Избранное',
-    icon: <AutoGraphOutlined />,
-    path: '/watchlist',
     id: 2
   },
   {
-    name: 'Новости',
-    icon: <MenuBookOutlined />,
-    path: '/news',
+    name: 'All Products',
+    icon: <TrendingUpOutlined />,
+    path: 'all-products',
     id: 3
   },
   {
-    name: 'Настройки',
-    icon: <SettingsOutlined />,
-    path: '/settings',
+    name: 'View Orders',
+    icon: <AutoGraphOutlined />,
+    path: 'orders',
     id: 4
   },
+  {
+    name: 'User List',
+    icon: <AutoGraphOutlined />,
+    path: 'useList',
+    id: 5
+  },
+
 ];

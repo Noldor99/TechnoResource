@@ -1,6 +1,33 @@
 import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material";
 
+function lightScrollbar(themeParam: any) {
+  return {
+    "&::-webkit-scrollbar": {
+      width: "6px",
+      height: "6px",
+      backgroundColor: "#C4C4C4",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      borderRadius: "6px",
+      backgroundColor: `${tokens(themeParam.palette.mode).secondary[100]}`,
+    },
+  };
+}
+function darkScrollbar(themeParam: any) {
+  return {
+    "&::-webkit-scrollbar": {
+      width: "6px",
+      height: "6px",
+      backgroundColor: "#C4C4C4",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      borderRadius: "6px",
+      backgroundColor: `${tokens(themeParam.palette.mode).primary[900]}`,
+    },
+  };
+}
+
 export const tokens = (mode: string) => ({
   ...(mode === "dark"
     ? {
@@ -34,6 +61,7 @@ export const tokens = (mode: string) => ({
         white: {
           DEFAULT: "#FFFFFF",
           100: "#F7F7F7",
+          200: "#F7F7F7",
         },
         gray: {
           DEFAULT: "#3C3C3C",
@@ -55,6 +83,7 @@ export const tokens = (mode: string) => ({
         },
         secondary: {
           DEFAULT: "#7C7C7C",
+          100: "#8d8d8d",
         },
         black: {
           DEFAULT: "#000000",
@@ -135,6 +164,38 @@ export const themeSettings: any = (mode: string) => {
       p: {
         fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 20,
+      },
+    },
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: (themeParam: any) => ({
+          body:
+            themeParam.palette.mode === "dark"
+              ? darkScrollbar(themeParam)
+              : lightScrollbar(themeParam),
+        }),
+      },
+    },
+    overrides: {
+      MuiOutlinedInput: {
+        root: {
+          "& $notchedOutline": {
+            "-webkit-box-shadow": "0 0 0 100px #d4e7f5 inset",
+          },
+          "&:hover $notchedOutline": {
+            // borderColor: orange[700]
+          },
+          "&$focused $notchedOutline": {
+            // borderColor: orange[900]
+          },
+        },
+        input: {
+          background: "white",
+          "-webkit-box-shadow": "0 0 0 100px #d4e7f5 inset !important",
+          "-webkit-text-fill-color": "#fff",
+          "caret-color": "#fff",
+          "border-radius": "inherit",
+        },
       },
     },
   };

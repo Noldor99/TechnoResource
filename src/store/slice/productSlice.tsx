@@ -11,11 +11,12 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     STORE_PRODUCTS(state, action) {
-      //   console.log(action.payload);
+      console.log(action.payload);
       state.products = action.payload.products;
     },
     GET_PRICE_RANGE(state: any, action) {
       const { products } = action.payload;
+
       const array: any = [];
       products.map((product: any) => {
         const price = product.price;
