@@ -44,7 +44,7 @@ const Cart = () => {
 
   const checkout = () => {
     if (isLoggedIn) {
-      navigate("/checkout-details");
+      navigate(`${BASE_URL}/checkout-details`);
     } else {
       dispatch(SAVE_URL(url));
       navigate(`${BASE_URL}/login`);

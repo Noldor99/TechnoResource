@@ -9,7 +9,7 @@ const NotFound = () => {
   return (
     <Box>
       <Typography variant="h2">404 </Typography>
-      <Typography>Opppppsss, page not found.</Typography>
+      <Typography variant="h6">Opppppsss, page not found.</Typography>
       <ButtonWhite onClick={() => navigate(`${BASE_URL}`)}>
         Back To Home
       </ButtonWhite>

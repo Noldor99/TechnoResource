@@ -1,17 +1,18 @@
+import { CircularProgress } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../components/loader/Loader";
+
 import useFetchCollection from "../../customHooks/useFetchCollection";
-import { selectUserID } from "../../redux/slice/authSlice";
-import { selectOrderHistory, STORE_ORDERS } from "../../redux/slice/orderSlice";
-import styles from "./OrderHistory.module.scss";
+import { selectUserID } from "../../store/slice/authSlice";
+import { selectOrderHistory, STORE_ORDERS } from "../../store/slice/orderSlice";
+import { BASE_URL } from "../../URL";
 
 const OrderHistory = () => {
   const { data, isLoading } = useFetchCollection("orders");
   const orders = useSelector(selectOrderHistory);
   const userID = useSelector(selectUserID);
-
+  console.log(orders)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,23 +20,23 @@ const OrderHistory = () => {
     dispatch(STORE_ORDERS(data));
   }, [dispatch, data]);
 
-  const handleClick = (id) => {
-    navigate(`/order-details/${id}`);
+  const handleClick = (id: string) => {
+    navigate(`${BASE_URL}/order-details/${id}`);
   };
 
-  const filteredOrders = orders.filter((order) => order.userID === userID);
+  const filteredOrders = orders.filter((order: any) => order.userID === userID);
 
   return (
     <section>
-      <div className={`container ${styles.order}`}>
+      <div>
         <h2>Your Order History</h2>
         <p>
           Open an order to leave a <b>Product Review</b>
         </p>
         <br />
         <>
-          {isLoading && <Loader />}
-          <div className={styles.table}>
+          {isLoading && <CircularProgress />}
+          <div>
             {filteredOrders.length === 0 ? (
               <p>No order found</p>
             ) : (
@@ -50,6 +51,7 @@ const OrderHistory = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  {/* @ts-ignore */}
                   {filteredOrders.map((order, index) => {
                     const {
                       id,
@@ -70,13 +72,7 @@ const OrderHistory = () => {
                           {orderAmount}
                         </td>
                         <td>
-                          <p
-                            className={
-                              orderStatus !== "Delivered"
-                                ? `${styles.pending}`
-                                : `${styles.delivered}`
-                            }
-                          >
+                          <p>
                             {orderStatus}
                           </p>
                         </td>

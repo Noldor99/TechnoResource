@@ -4,12 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { FILTER_BY_BRAND, FILTER_BY_PRICE, FILTER_BY_CATEGORY } from "../../store/slice/filterSlice";
 import { selectProducts, selectMinPrice, selectMaxPrice } from "../../store/slice/productSlice";
 import DrawerThema from "../styleComponents/containers/DrawerThema";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ButtonBlueBack from "../styleComponents/buttons/ButtonBlueBack";
 import FlexBetween from "../styleComponents/FlexBetween";
 import TypographyTitle from "../styleComponents/TypographyTitle";
-import { ICard } from "../../models/models";
-
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 
 interface Props {
   handleDrawerToggle: () => void,
@@ -83,7 +81,7 @@ const ProductFilter = (props: Props) => {
               onClick={() => filterProducts(text)}
             >
               <ListItemIcon>
-                <ArrowForwardIosIcon fontSize='small' />
+                <HorizontalRuleIcon fontSize='small' />
               </ListItemIcon>
               <ListItemText primary={text} />
 

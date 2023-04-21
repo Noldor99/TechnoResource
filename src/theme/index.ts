@@ -165,6 +165,10 @@ export const themeSettings: any = (mode: string) => {
         fontFamily: ["Poppins", "sans-serif"].join(","),
         fontSize: 20,
       },
+      body2: {
+        fontFamily: ["Poppins", "sans-serif"].join(","),
+        color: `${colors.secondary.DEFAULT} `,
+      },
     },
     components: {
       MuiCssBaseline: {

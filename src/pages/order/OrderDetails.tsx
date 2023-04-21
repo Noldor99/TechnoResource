@@ -1,10 +1,10 @@
+import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useFetchDocument from "../../customHooks/useFetchDocument";
-import spinnerImg from "../../assets/spinner.jpg";
-import styles from "./OrderDetails.module.scss";
+
 const OrderDetails = () => {
-  const [order, setOrder] = useState(null);
+  const [order, setOrder] = useState<any>(null);
   const { id } = useParams();
   const { document } = useFetchDocument("orders", id);
 
@@ -14,14 +14,14 @@ const OrderDetails = () => {
 
   return (
     <section>
-      <div className={`container ${styles.table}`}>
+      <div>
         <h2>Order Details</h2>
         <div>
           <Link to="/order-history">&larr; Back To Orders</Link>
         </div>
         <br />
         {order === null ? (
-          <img src={spinnerImg} alt="Loading..." style={{ width: "50px" }} />
+          <Typography>Null</Typography>
         ) : (
           <>
             <p>
@@ -46,6 +46,7 @@ const OrderDetails = () => {
                 </tr>
               </thead>
               <tbody>
+                {/* @ts-ignore */}
                 {order.cartItems.map((cart, index) => {
                   const { id, name, price, imageURL, cartQuantity } = cart;
                   return (
@@ -66,7 +67,7 @@ const OrderDetails = () => {
                       <td>{price}</td>
                       <td>{cartQuantity}</td>
                       <td>{(price * cartQuantity).toFixed(2)}</td>
-                      <td className={styles.icons}>
+                      <td>
                         <Link to={`/review-product/${id}`}>
                           <button className="--btn --btn-primary">
                             Review Product

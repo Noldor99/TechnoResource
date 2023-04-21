@@ -52,6 +52,7 @@ const DrawerAdmin = (props: Props) => {
       <Divider />
       <List>
         <ListItem>
+          {/* @ts-ignore */}
           <SearchBarComponent />
         </ListItem>
       </List>

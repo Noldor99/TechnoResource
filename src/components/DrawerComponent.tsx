@@ -57,6 +57,7 @@ const DrawerComponent = (props: Props) => {
       <Divider />
       <List>
         <ListItem>
+          {/* @ts-ignore */}
           <SearchBarComponent />
         </ListItem>
       </List>

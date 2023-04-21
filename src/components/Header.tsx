@@ -94,7 +94,7 @@ function ResponsiveDrawer() {
           </ShowOnDesktop>
           <FlexBetween>
             <ThemeSwitcher />
-            <IconButton onClick={() => navigate('card')}>
+            <IconButton onClick={() => navigate('cart')}>
               <Badge sx={{
                 "& .MuiBadge-badge": { backgroundColor: '#1e8023', color: 'white' }
               }} badgeContent={CartTotalQuantity}>

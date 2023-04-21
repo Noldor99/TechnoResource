@@ -6,7 +6,6 @@ import {
   AddCircleOutlineOutlined,
   TrendingUpOutlined,
 } from '@mui/icons-material';
-import { BASE_URL } from '../../../URL';
 
 
 export const navMenuUser = [
@@ -25,7 +24,7 @@ export const navMenuUser = [
   {
     name: 'My Orders',
     icon: <MenuBookOutlined />,
-    path: 'myOrders',
+    path: 'order-history',
     id: 3
   },
   {
