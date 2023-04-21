@@ -11,10 +11,12 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
+import { IProduct } from "../../../models/models";
 import { selectProducts } from "../../../store/slice/productSlice";
 import { BASE_URL } from "../../../URL";
 import ButtonBlueBack from "../../styleComponents/buttons/ButtonBlueBack";
 import FormGroupThema from "../../styleComponents/FormGroupThema";
+import SelectForm from "../../styleComponents/SelectForm";
 import TextFieldForm from "../../styleComponents/TextFieldForm";
 import UploadButtons from "./UploadButtons";
 
@@ -39,8 +41,8 @@ const initialState = {
 const AddProduct = () => {
   const { id } = useParams();
   const products = useSelector(selectProducts);
-  const productEdit = products.find((item: any) => item.id === id);
-  console.log(productEdit);
+  const productEdit = products.find((item: IProduct) => item.id === (id));
+
 
   const [product, setProduct] = useState(() => {
     const newState = detectForm(id, { ...initialState }, productEdit);
@@ -113,14 +115,18 @@ const AddProduct = () => {
     }
   };
 
+
   const editProduct = (e: any) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (product.imageURL !== productEdit.imageURL) {
+    //@ts-ignore
+    if (productEdit && product.imageURL !== productEdit.imageURL) {
+      //@ts-ignore
       const storageRef = ref(storage, productEdit.imageURL);
       deleteObject(storageRef);
     }
+
 
     try {
       // @ts-ignore
@@ -131,7 +137,8 @@ const AddProduct = () => {
         category: product.category,
         brand: product.brand,
         desc: product.desc,
-        createdAt: productEdit.createdAt,
+        // @ts-ignore
+        createdAt: productEdit?.createdAt,
         editedAt: Timestamp.now().toDate(),
       });
       setIsLoading(false);
@@ -159,7 +166,7 @@ const AddProduct = () => {
             required
             fullWidth
             name="name"
-            value={product.name}
+            value={product?.name}
             onChange={(e) => handleInputChange(e)}
           />
           <FormControl sx={{ gap: '10px' }}>
@@ -196,7 +203,7 @@ const AddProduct = () => {
           />
           <FormControl>
             <InputLabel>Category</InputLabel>
-            <Select
+            <SelectForm
               required
               fullWidth
               name="category"
@@ -213,7 +220,7 @@ const AddProduct = () => {
                   </MenuItem>
                 );
               })}
-            </Select>
+            </SelectForm>
 
           </FormControl>
 

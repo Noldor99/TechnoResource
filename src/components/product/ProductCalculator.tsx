@@ -1,19 +1,27 @@
 import { Box, Button, Typography } from '@mui/material'
-import React from 'react'
+import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { ICard, IProduct } from '../../models/models';
 import { selectCartItems, ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, DECREASE_CART } from '../../store/slice/cartSlice';
 import FlexBetween from '../styleComponents/FlexBetween';
 
-const ProductCalculator = ({ id, product }: any) => {
+
+interface ProductCalculatorProps {
+  id: string;
+  product?: IProduct
+}
+
+
+const ProductCalculator: FC<ProductCalculatorProps> = ({ id, product }: ProductCalculatorProps) => {
 
 
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
 
-  const cart = cartItems.find((cart: any) => cart.id === id);
+  const cart = cartItems.find((cart: ICard) => cart.id === id);
 
 
-  const isCartAdded = cartItems.findIndex((cart: any) => {
+  const isCartAdded = cartItems.findIndex((cart: ICard) => {
     return cart.id === id;
   });
 
@@ -47,7 +55,7 @@ const ProductCalculator = ({ id, product }: any) => {
               -
             </Button>
             <Typography fontWeight='bold'>
-              {cart.cartQuantity}
+              {cart?.cartQuantity}
             </Typography>
             <Button
               variant='outlined' color="success"

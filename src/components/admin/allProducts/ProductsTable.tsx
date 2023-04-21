@@ -4,8 +4,15 @@ import { Box, IconButton, Tooltip, Typography } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../../URL';
+import { IProduct } from '../../../models/models';
 
-const ProductsTable = ({ products, confirmDelete }: any) => {
+
+interface Props {
+  products: IProduct[];
+  confirmDelete: (id: number, imageURL: string) => void;
+}
+
+const ProductsTable = ({ products, confirmDelete }: Props) => {
 
   const navigate = useNavigate()
 

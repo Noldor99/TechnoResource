@@ -31,8 +31,8 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState<any>("latest");
-  const [grid, setGrid] = useState<any>(true);
+  const [sort, setSort] = useState<string>("latest");
+  const [grid, setGrid] = useState<boolean>(true);
 
 
   useEffect(() => {
@@ -102,7 +102,7 @@ const HomePage = () => {
 
           <Grid item sm={6} md={6}>
 
-            <SearchBarComponent value={search} onChange={(e: any) => setSearch(e.target.value)} />
+            <SearchBarComponent value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} />
           </Grid>
           <Grid item sm={6} md={6}
             display="flex"

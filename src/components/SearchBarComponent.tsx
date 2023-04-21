@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { TextField, InputAdornment } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
@@ -15,8 +15,13 @@ const SearchTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const SearchBarComponent = ({ value, onChange }: any) => {
 
+interface SearchBarProps {
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SearchBarComponent: FC<SearchBarProps> = ({ value, onChange }: SearchBarProps) => {
 
 
 

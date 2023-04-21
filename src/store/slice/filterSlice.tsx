@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "..";
+import { IProduct } from "../../models/models";
 
 const initialState = {
   filteredProducts: [],
@@ -11,7 +13,7 @@ const filterSlice = createSlice({
     FILTER_BY_SEARCH(state, action) {
       const { products, search } = action.payload;
       const tempProducts = products.filter(
-        (product: any) =>
+        (product: IProduct) =>
           product.name.toLowerCase().includes(search.toLowerCase()) ||
           product.category.toLowerCase().includes(search.toLowerCase())
       );
@@ -19,31 +21,31 @@ const filterSlice = createSlice({
       state.filteredProducts = tempProducts;
     },
     SORT_PRODUCTS(state, action) {
-      const { products, sort }: any = action.payload;
+      const { products, sort } = action.payload;
       let tempProducts = [];
       if (sort === "latest") {
         tempProducts = products;
       }
 
       if (sort === "lowest-price") {
-        tempProducts = products.slice().sort((a: any, b: any) => {
-          return a.price - b.price;
+        tempProducts = products.slice().sort((a: IProduct, b: IProduct) => {
+          return (a.price - b.price) as number;
         });
       }
 
       if (sort === "highest-price") {
-        tempProducts = products.slice().sort((a: any, b: any) => {
+        tempProducts = products.slice().sort((a: IProduct, b: IProduct) => {
           return b.price - a.price;
         });
       }
 
       if (sort === "a-z") {
-        tempProducts = products.slice().sort((a: any, b: any) => {
+        tempProducts = products.slice().sort((a: IProduct, b: IProduct) => {
           return a.name.localeCompare(b.name);
         });
       }
       if (sort === "z-a") {
-        tempProducts = products.slice().sort((a: any, b: any) => {
+        tempProducts = products.slice().sort((a: IProduct, b: IProduct) => {
           return b.name.localeCompare(a.name);
         });
       }
@@ -57,7 +59,7 @@ const filterSlice = createSlice({
         tempProducts = products;
       } else {
         tempProducts = products.filter(
-          (product: any) => product.category === category
+          (product: IProduct) => product.category === category
         );
       }
       state.filteredProducts = tempProducts;
@@ -68,14 +70,14 @@ const filterSlice = createSlice({
       if (brand === "All") {
         tempProducts = products;
       } else {
-        tempProducts = products.filter((product: any) => product.brand === brand);
+        tempProducts = products.filter((product: IProduct) => product.brand === brand);
       }
       state.filteredProducts = tempProducts;
     },
     FILTER_BY_PRICE(state, action) {
       const { products, price } = action.payload;
       let tempProducts = [];
-      tempProducts = products.filter((product: any) => product.price <= price);
+      tempProducts = products.filter((product: IProduct) => product.price <= price);
 
       state.filteredProducts = tempProducts;
     },
@@ -90,6 +92,6 @@ export const {
   FILTER_BY_PRICE,
 } = filterSlice.actions;
 
-export const selectFilteredProducts = (state: any) => state.filter.filteredProducts;
+export const selectFilteredProducts = (state: RootState) => state.filter.filteredProducts;
 
 export default filterSlice.reducer;

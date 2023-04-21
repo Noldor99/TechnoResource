@@ -14,10 +14,11 @@ const TextFieldForm = styled(TextField)(({ theme }) => ({
     color: `${theme.palette.text.primary} !important `,
   },
   '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    // '-webkit-box-shadow': '0 0 0 100px #a64545 inset',
+    // '-webkit-box-shadow': '0 0 0 100px #000000 inset',
   },
-  '& .css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill': {
-    '-webkit-box-shadow': '0 0 0 100px #000000 inset !important',
+  '& .MuiInputBase-input': {
+    // '-webkit-box-shadow': 'none !important',
+    '-webkit-box-shadow': `0 0 0 100px ${tokens(theme.palette.mode).primary.DEFAULT} inset !important`,
   },
 }));
 

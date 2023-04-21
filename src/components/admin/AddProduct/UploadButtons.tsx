@@ -4,7 +4,11 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Box from '@mui/material/Box';
 import ListItemButtonBlue from '../../styleComponents/buttons/ListItemButtonBlue';
 
-export default function UploadButtons({ handleImageChange }: any) {
+interface UploadButtonsProps {
+  handleImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function UploadButtons({ handleImageChange }: UploadButtonsProps) {
   const [fileName, setFileName] = React.useState('File name');
 
   const handleFileInputChange = (event: any) => {

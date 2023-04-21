@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "..";
 
-const initialState: any = {
+interface booleanSliceProps {
+  isOpenMenu: boolean,
+  isGrid: boolean,
+}
+
+const initialState: booleanSliceProps = {
   isOpenMenu: false,
   isGrid: true,
 };
@@ -19,7 +25,7 @@ export const booleanSlice = createSlice({
 });
 export const { SWITCH_MENU, SWITCH_GRID } = booleanSlice.actions;
 
-export const selectIsOpenMenu = (state: any) => state.boolean.isOpenMenu;
-export const selectIsGrid = (state: any) => state.boolean.isGrid;
+export const selectIsOpenMenu = (state: RootState) => state.boolean.isOpenMenu;
+export const selectIsGrid = (state: RootState) => state.boolean.isGrid;
 
 export default booleanSlice.reducer;

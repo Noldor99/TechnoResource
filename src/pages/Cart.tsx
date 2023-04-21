@@ -13,6 +13,7 @@ import FlexBetween from "../components/styleComponents/FlexBetween";
 import ButtonBlueGreen from "../components/styleComponents/buttons/ButtonBlueGreen";
 import MenuCartMore from "../components/MenuCartMore";
 import { BASE_URL } from "../URL";
+import { ICard } from "../models/models";
 
 
 
@@ -75,7 +76,7 @@ const Cart = () => {
             <Typography variant="h4" textAlign='end'>
               Shopping Cart
             </Typography>
-            {cartItems.map((cart: any, index: number) => {
+            {cartItems.map((cart: ICard, index: number) => {
               const { id, name, price, imageURL, cartQuantity } = cart;
               return (
                 <>
@@ -109,7 +110,7 @@ const Cart = () => {
                           </Grid>
                           <Grid item xs={12} sm={6} container justifyContent="space-between">
                             <Typography>Price: {price}$</Typography>
-                            <Typography>PriceQuantity: {cartQuantity * price.toFixed(2)}$</Typography>
+                            <Typography>PriceQuantity: {cartQuantity * Number(price.toFixed(2))}$</Typography>
                           </Grid>
                         </Grid>
                       </Grid>
@@ -127,7 +128,7 @@ const Cart = () => {
               </Button>
             </Grid>
             <Grid item xs={12} sm={4} >
-              <Button onClick={() => navigate(-1)} variant='outlined' color='success' fullWidth>
+              <Button onClick={() => navigate(`${BASE_URL}`)} variant='outlined' color='success' fullWidth>
                 Continue shopping
               </Button>
             </Grid>

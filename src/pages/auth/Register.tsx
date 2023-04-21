@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, Container, FormControl, TextField, Typography } from "@mui/material";
 import ButtonBlueBack from "../../components/styleComponents/buttons/ButtonBlueBack";
 import { BASE_URL } from "../../URL";
@@ -17,7 +17,7 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const registerUser = (e: any) => {
+  const registerUser = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== cPassword) {
       toast.error("Passwords do not match.");

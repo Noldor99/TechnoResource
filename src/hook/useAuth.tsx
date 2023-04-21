@@ -16,7 +16,7 @@ export const useInitAuthSlice = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user: any) => {
       if (user) {
-        // console.log(user);
+        console.log(user);
         if (user.displayName == null) {
           const u1 = user.email.slice(0, -10);
           const uName = u1.charAt(0).toUpperCase() + u1.slice(1);

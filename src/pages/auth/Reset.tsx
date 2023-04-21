@@ -6,10 +6,10 @@ import PaperRounding from '../../components/styleComponents/containers/PaperRoun
 import TextFieldForm from '../../components/styleComponents/TextFieldForm';
 
 const ResetPassword = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // handle reset password logic here
     setMessage(`Instructions for resetting your password have been sent to ${email}`);

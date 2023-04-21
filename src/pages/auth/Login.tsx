@@ -1,14 +1,11 @@
 import {
   Button,
-  CircularProgress,
   Container,
   FormControl,
-  styled,
-  TextField,
   Typography
 } from '@mui/material';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   GoogleAuthProvider,
@@ -17,7 +14,6 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../firebase/config';
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
 // import { selectPreviousURL } from '../../store/slice/cartSlice';
 import GoogleIcon from '@mui/icons-material/Google';
 import ButtonBlueBack from '../../components/styleComponents/buttons/ButtonBlueBack';
@@ -43,7 +39,7 @@ const LoginForm = () => {
     navigate(`${BASE_URL}`);
   };
 
-  const loginUser = (e: any) => {
+  const loginUser = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 

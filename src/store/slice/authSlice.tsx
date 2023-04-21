@@ -1,4 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "..";
+
+
+interface SetActiveUserAction {
+  email: string | null,
+  userName: string | null,
+  userID: string | null,
+}
 
 interface IInitialState {
   isLoggedIn: boolean,
@@ -18,9 +26,9 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    SET_ACTIVE_USER: (state, action) => {
-      // console.log(action.payload);
-      const { email, userName, userID } = action.payload;
+    SET_ACTIVE_USER: (state, { payload }: PayloadAction<SetActiveUserAction>) => {
+
+      const { email, userName, userID } = payload;
       state.isLoggedIn = true;
       state.email = email;
       state.userName = userName;
@@ -37,9 +45,9 @@ const authSlice = createSlice({
 
 export const { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } = authSlice.actions;
 
-export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
-export const selectEmail = (state: any) => state.auth.email;
-export const selectUserName = (state: any) => state.auth.userName;
-export const selectUserID = (state: any) => state.auth.userID;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectEmail = (state: RootState) => state.auth.email;
+export const selectUserName = (state: RootState) => state.auth.userName;
+export const selectUserID = (state: RootState) => state.auth.userID;
 
 export default authSlice.reducer;

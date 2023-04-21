@@ -3,8 +3,12 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectEmail } from "../store/slice/authSlice";
 
+interface Props {
+  children: React.ReactNode;
+}
 
-export const ShowAdminRoute = ({ children }: any) => {
+
+export const ShowAdminRoute = ({ children }: Props) => {
   const userEmail = useSelector(selectEmail);
 
   if (userEmail === "qwerr1d9942017@gmail.com") {
@@ -24,7 +28,7 @@ export const ShowAdminRoute = ({ children }: any) => {
   );
 };
 
-export const ShowAdminLink = ({ children }: any) => {
+export const ShowAdminLink = ({ children }: Props) => {
   const userEmail = useSelector(selectEmail);
 
   if (userEmail === "qwerr1d9942017@gmail.com") {

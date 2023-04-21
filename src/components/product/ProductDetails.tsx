@@ -6,10 +6,11 @@ import StarsRating from "react-star-rate";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import PaperSharp from "../styleComponents/containers/PaperSharp";
 import ProductDetailsCard from "./ProductDetailsCard";
+import { IProduct } from "../../models/models";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<IProduct | null>(null);
 
 
 

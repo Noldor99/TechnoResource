@@ -67,7 +67,7 @@ const DrawerComponent = (props: Props) => {
       <List>
         <ShowOnLogout>
           <ListItem>
-            <ListItemButtonBlue onClick={() => navigate(`${BASE_URL}login`)}>
+            <ListItemButtonBlue onClick={() => navigate(`${BASE_URL}/login`)}>
               <ListItemIcon>
                 <LockOpenIcon />
               </ListItemIcon>

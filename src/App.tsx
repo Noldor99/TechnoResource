@@ -1,10 +1,9 @@
 import HomePage from './pages/HomePage'
 import { Route, Routes } from 'react-router-dom'
 import { ColorModeContext, useMode } from './theme'
-import { createTheme, CssBaseline, darkScrollbar, GlobalStyles, ThemeProvider } from '@mui/material'
-
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import Layout from './components/Layout'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Admin from './pages/Admin'
 import LoginForm from './pages/auth/Login'
@@ -12,16 +11,12 @@ import Register from './pages/auth/Register'
 import Reset from './pages/auth/Reset'
 import ProductDetails from './components/product/ProductDetails'
 import Cart from './pages/Cart'
-import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 import { BASE_URL } from './URL'
 import BackgroundGradient from './components/BackgroundGradient'
 import Contact from './pages/Contact'
 import MyOrders from './pages/MyOrders'
 import Likes from './pages/Likes'
-
-
-
-
+import NotFound from './pages/NotFound'
 
 
 function App() {
@@ -47,12 +42,18 @@ function App() {
                 <Route path="likes" element={<Likes />} />
                 <Route path="myOrders" element={<MyOrders />} />
                 <Route path="contact" element={<Contact />} />
-
+                {/*                 
+                <Route path="/checkout-details" element={<CheckoutDetails />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/checkout-success" element={<CheckoutSuccess />} />
+                <Route path="/order-history" element={<OrderHistory />} />
+                <Route path="/order-details/:id" element={<OrderDetails />} />
+                <Route path="/review-product/:id" element={<ReviewProducts />} /> */}
 
                 {/* <AdminOnlyRoute> */}
                 <Route path="admin/*" element={<Admin />} />
                 {/* </AdminOnlyRoute> */}
-
+                <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
           </div>

@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import ProductItem from "./ProductItem";
 import { Grid, Pagination } from "@mui/material";
 import PaperSharp from "../styleComponents/containers/PaperSharp";
+import { IProduct } from "../../models/models";
 
+interface ProductListProps {
+  filteredProducts: IProduct[],
+  products: IProduct[],
+  grid: boolean
+}
 
-const ProductList = ({ filteredProducts, products, grid }: any) => {
+const ProductList: FC<ProductListProps> = ({ filteredProducts, products, grid }: ProductListProps) => {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +27,7 @@ const ProductList = ({ filteredProducts, products, grid }: any) => {
 
   return (
     <PaperSharp sx={{ padding: 2 }}>
-      {products.lenght === 0 ? (
+      {products.length === 0 ? (
         <p>No product found.</p>
       ) : (
         <>

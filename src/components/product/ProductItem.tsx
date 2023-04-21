@@ -1,6 +1,8 @@
 import { Box, Button, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { IProduct } from "../../models/models";
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY } from "../../store/slice/cartSlice";
 import { BASE_URL } from "../../URL";
 import BoxImg from "../styleComponents/BoxImg";
@@ -8,13 +10,22 @@ import PaperRounding from "../styleComponents/containers/PaperRounding";
 import TypographyTitle from "../styleComponents/TypographyTitle";
 import ProductCalculator from "./ProductCalculator";
 
+interface ProductItemProps {
+  product: IProduct,
+  grid: boolean,
+  id: string,
+  name: string,
+  price: number,
+  desc: string,
+  imageURL: string
+}
 
-const ProductItem = ({ product, grid, id, name, price, desc, imageURL }: any) => {
+const ProductItem: FC<ProductItemProps> = ({ product, grid, id, name, price, desc, imageURL }: ProductItemProps) => {
 
   const navigate = useNavigate()
 
 
-  const shortenText = (text: any, n: any) => {
+  const shortenText = (text: string, n: number) => {
     if (text.length > n) {
       const shortenedText = text.substring(0, n).concat("...");
       return shortenedText;

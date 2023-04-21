@@ -1,5 +1,5 @@
 import { Toolbar, Divider, List, ListItemButton, ListItemIcon, ListItemText, Box, Typography, Select, MenuItem, Slider, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FILTER_BY_BRAND, FILTER_BY_PRICE, FILTER_BY_CATEGORY } from "../../store/slice/filterSlice";
 import { selectProducts, selectMinPrice, selectMaxPrice } from "../../store/slice/productSlice";
@@ -8,16 +8,17 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ButtonBlueBack from "../styleComponents/buttons/ButtonBlueBack";
 import FlexBetween from "../styleComponents/FlexBetween";
 import TypographyTitle from "../styleComponents/TypographyTitle";
+import { ICard } from "../../models/models";
+
+
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
+  handleDrawerToggle: () => void,
+  mobileOpen: boolean,
   window?: () => Window;
   drawerWidth: number
 }
 
-const ProductFilter = (props: any) => {
+const ProductFilter = (props: Props) => {
 
   const { window, drawerWidth, mobileOpen, handleDrawerToggle } = props;
 
@@ -26,7 +27,7 @@ const ProductFilter = (props: any) => {
   const [price, setPrice] = useState(3000);
   const products = useSelector(selectProducts);
   const minPrice = useSelector(selectMinPrice);
-  const maxPrice = useSelector(selectMaxPrice);
+  const maxPrice = useSelector(selectMaxPrice) as number | null;
 
 
   const container = window !== undefined ? () => window().document.body : undefined;
@@ -54,7 +55,7 @@ const ProductFilter = (props: any) => {
     dispatch(FILTER_BY_PRICE({ products, price }));
   }, [dispatch, products, price]);
 
-  const filterProducts = (cat: any) => {
+  const filterProducts = (cat: string) => {
     setCategory(cat);
     dispatch(FILTER_BY_CATEGORY({ products, category: cat }));
   };
@@ -62,8 +63,11 @@ const ProductFilter = (props: any) => {
   const clearFilters = () => {
     setCategory("All");
     setBrand("All");
-    setPrice(maxPrice);
+    if (maxPrice !== null) {
+      setPrice(maxPrice);
+    }
   };
+
 
   const drawer = (
     <Divider sx={{ display: 'block' }} >
@@ -109,11 +113,11 @@ const ProductFilter = (props: any) => {
           </TypographyTitle>
           <Typography>{`$${price}`}</Typography>
         </FlexBetween>
-
+        {/* @ts-ignore */}
         <Slider
           sx={{ color: '#66bb6a' }}
-          value={price}
-          onChange={(e: any) => setPrice(e.target.value)}
+          value={price || null}
+          onChange={(e: React.ChangeEvent<any>) => setPrice(e.target.value)}
           min={minPrice}
           max={maxPrice}
         />

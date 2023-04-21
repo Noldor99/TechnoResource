@@ -9,7 +9,7 @@ function lightScrollbar(themeParam: any) {
       backgroundColor: "#C4C4C4",
     },
     "&::-webkit-scrollbar-thumb": {
-      borderRadius: "6px",
+      borderRadius: "3px",
       backgroundColor: `${tokens(themeParam.palette.mode).secondary[100]}`,
     },
   };
@@ -22,7 +22,7 @@ function darkScrollbar(themeParam: any) {
       backgroundColor: "#C4C4C4",
     },
     "&::-webkit-scrollbar-thumb": {
-      borderRadius: "6px",
+      borderRadius: "3px",
       backgroundColor: `${tokens(themeParam.palette.mode).primary[900]}`,
     },
   };
