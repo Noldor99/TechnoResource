@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material";
+import styled from "@emotion/styled";
 
 function lightScrollbar(themeParam: any) {
   return {
@@ -167,8 +168,14 @@ export const themeSettings: any = (mode: string) => {
       },
       body2: {
         fontFamily: ["Poppins", "sans-serif"].join(","),
-        color: `${colors.secondary.DEFAULT} `,
+        fontSize: 14,
       },
+      variants: [
+        {
+          props: { color: "my" },
+          style: { color: `${colors.secondary.DEFAULT} ` },
+        },
+      ],
     },
     components: {
       MuiCssBaseline: {

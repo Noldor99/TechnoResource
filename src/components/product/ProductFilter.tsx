@@ -8,6 +8,40 @@ import ButtonBlueBack from "../styleComponents/buttons/ButtonBlueBack";
 import FlexBetween from "../styleComponents/FlexBetween";
 import TypographyTitle from "../styleComponents/TypographyTitle";
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import {
+  AllInbox as AllInboxIcon,
+  Phone as PhoneIcon,
+  Computer as ComputerIcon,
+  LaptopMac as LaptopIcon,
+} from '@mui/icons-material';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import AppShortcutIcon from '@mui/icons-material/AppShortcut';
+
+const categoryIcon = [
+  {
+    text: 'All',
+    icon: <AllInboxIcon fontSize='small' />,
+  },
+  {
+    text: 'Phone',
+    icon: <AppShortcutIcon fontSize='small' />,
+  },
+  {
+    text: 'Electronics',
+    icon: <ComputerIcon fontSize='small' />,
+  },
+  {
+    text: 'Fashion',
+    icon: <ShoppingBagIcon fontSize='small' />,
+  },
+  {
+    text: 'Laptop',
+    icon: <LaptopIcon fontSize='small' />,
+  },
+];
+
+
+
 
 interface Props {
   handleDrawerToggle: () => void,
@@ -28,6 +62,8 @@ const ProductFilter = (props: Props) => {
   const maxPrice = useSelector(selectMaxPrice) as number | null;
 
 
+
+
   const container = window !== undefined ? () => window().document.body : undefined;
 
 
@@ -44,6 +80,9 @@ const ProductFilter = (props: Props) => {
     ...new Set(products.map((product) => product.brand)),
   ];
   // console.log(allBrands);
+
+  const filteredCategoryIcon = categoryIcon.filter((item) => allCategories.includes(item.text));
+
 
   useEffect(() => {
     dispatch(FILTER_BY_BRAND({ products, brand }));
@@ -75,15 +114,15 @@ const ProductFilter = (props: Props) => {
           Categories
         </TypographyTitle>
         <List >
-          {allCategories.map((text, index) => (
+          {filteredCategoryIcon.map((item, index) => (
             <ListItemButton
               key={index}
-              onClick={() => filterProducts(text)}
+              onClick={() => filterProducts(item.text)}
             >
               <ListItemIcon>
-                <HorizontalRuleIcon fontSize='small' />
+                {item.icon}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.text} />
 
             </ListItemButton>
           )

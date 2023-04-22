@@ -16,11 +16,15 @@ import Logo from '../assets/images/sidebar/logo.svg'
 import { BASE_URL } from '../URL';
 import MyLogo from './MyLogo';
 
+
 const drawerWidth = 240;
 
 interface Props {
   window?: () => Window;
 }
+
+
+
 
 
 const DrawerComponent = (props: Props) => {

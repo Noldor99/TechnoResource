@@ -25,7 +25,7 @@ const Layout: FC = (): JSX.Element => {
           <Header />
           <Box
             component="main"
-            sx={{ flexGrow: 1, p: 3 }}
+            sx={{ flexGrow: 1, paddingTop: 3, paddingBottom: 3 }}
           >
             <DrawerComponent />
             <Toolbar />

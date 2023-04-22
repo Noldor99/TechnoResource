@@ -22,7 +22,7 @@ const CheckoutSummary = () => {
       <Stack spacing={2}>
 
 
-        <TypographyTitle variant="h2">
+        <TypographyTitle variant="h4">
           Checkout Summary
         </TypographyTitle>
         <Box>
@@ -35,7 +35,7 @@ const CheckoutSummary = () => {
             </>
           ) : (
             <Stack spacing={2}>
-              <Typography variant="body1">
+              <Typography variant="body2">
                 <b>{`Cart item(s):  ${cartTotalQuantity}`}</b>
               </Typography>
               <FlexBetween  >
@@ -51,9 +51,9 @@ const CheckoutSummary = () => {
                 return (
                   <PaperRounding key={id} sx={{ padding: 2 }}>
                     <Typography variant="h4">Product: {name}</Typography>
-                    <Typography>Quantity: {cartQuantity}</Typography>
-                    <Typography>Unit price: {price}</Typography>
-                    <Typography>Set price: {price * cartQuantity}</Typography>
+                    <Typography variant="body2">Quantity: {cartQuantity}</Typography>
+                    <Typography variant="body2">Unit price: {price}</Typography>
+                    <Typography variant="body2">Set price: {price * cartQuantity}</Typography>
                   </PaperRounding>
                 );
               })}
