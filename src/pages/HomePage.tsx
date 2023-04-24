@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import useFetchCollection from '../customHooks/useFetchCollection';
 import { selectProducts, STORE_PRODUCTS, GET_PRICE_RANGE } from '../store/slice/productSlice';
 import ProductFilter from '../components/product/ProductFilter';
-import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Grid, FormControl, InputLabel, Select, MenuItem, Container } from '@mui/material';
 import SearchBarComponent from '../components/SearchBarComponent';
 import MuiListAltIcon from '@mui/icons-material/ListAlt';
 import WindowIcon from '@mui/icons-material/Window';
@@ -64,7 +64,7 @@ const HomePage = () => {
 
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', margin: '0 12px' }}>
       <PaperSharp
         sx={{
           padding: 2,

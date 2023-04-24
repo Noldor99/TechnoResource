@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import booleanSlice from "./slice/booleanSlice";
+import likeSlice from "./slice/likeSlice";
 import menuSwitchSlice from "./slice/booleanSlice";
 import productReducer from "./slice/productSlice";
 import filterReducer from "./slice/filterSlice";
@@ -12,6 +13,7 @@ const store = configureStore({
   reducer: {
     auth: authSlice,
     boolean: booleanSlice,
+    like: likeSlice,
     menuSwitch: menuSwitchSlice,
     product: productReducer,
     filter: filterReducer,

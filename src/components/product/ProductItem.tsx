@@ -1,14 +1,15 @@
-import { Box, Button, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { Box, Button, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../models/models";
-import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY } from "../../store/slice/cartSlice";
 import { BASE_URL } from "../../URL";
 import BoxImg from "../styleComponents/BoxImg";
 import PaperRounding from "../styleComponents/containers/PaperRounding";
 import TypographyTitle from "../styleComponents/TypographyTitle";
 import ProductCalculator from "./ProductCalculator";
+import FlexBetween from "../styleComponents/FlexBetween";
+import LikeTurn from "./LikeTurn";
 
 interface ProductItemProps {
   product: IProduct,
@@ -54,10 +55,13 @@ const ProductItem: FC<ProductItemProps> = ({ product, grid, id, name, price, des
             </Typography>
 
           </Grid>
-          <Grid item >
-            <TypographyTitle color="text.secondary">
-              Prise:  {`$${product.price}`}
-            </TypographyTitle>
+          <Grid item xs={12}>
+            <FlexBetween>
+              <TypographyTitle color="text.secondary">
+                Prise:  {`$${product.price}`}
+              </TypographyTitle>
+              <LikeTurn id={product.id} />
+            </FlexBetween>
           </Grid>
         </Grid>
         <Grid item container sx={{ padding: 2 }} spacing={2}>

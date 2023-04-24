@@ -1,4 +1,4 @@
-import { Box, Typography, LinearProgress, Select, MenuItem, TextareaAutosize, CircularProgress, FormControl, FormGroup, InputLabel } from "@mui/material";
+import { Box, Typography, LinearProgress, Select, MenuItem, TextareaAutosize, CircularProgress, FormControl, FormGroup, InputLabel, Container } from "@mui/material";
 import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import {
   deleteObject,
@@ -151,7 +151,7 @@ const AddProduct = () => {
   };
 
   return (
-    <>
+    <Container>
       {isLoading && <CircularProgress />}
       <form onSubmit={detectForm(id, addProduct, editProduct)}>
         <FormGroupThema
@@ -248,7 +248,7 @@ const AddProduct = () => {
 
         </FormGroupThema>
       </form>
-    </>
+    </Container>
   );
 }
 

@@ -99,7 +99,7 @@ const Cart = () => {
                             <Typography>{name}</Typography>
                           </Grid>
                           <Grid item >
-                            <MenuCartMore id={id} />
+                            <MenuCartMore id={id} cartItems={cartItems} />
                           </Grid>
                         </Grid>
                         <Grid item container justifyContent="space-between" alignItems='center'

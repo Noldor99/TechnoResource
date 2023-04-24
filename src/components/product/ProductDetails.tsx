@@ -43,18 +43,18 @@ const ProductDetails = () => {
       )
       }
       <PaperSharp sx={{ padding: 2, marginTop: 5 }}>
-        <h3>Product Reviews</h3>
-        <div>
+        <Typography variant='h3'>Product Reviews</Typography>
+        <Box>
           {filteredReviews.length === 0 ? (
-            <p>There are no reviews for this product yet.</p>
+            <Typography>There are no reviews for this product yet.</Typography>
           ) : (
             <>
               {filteredReviews.map((item, index) => {
                 const { rate, review, reviewDate, userName } = item;
                 return (
-                  <div key={index}>
+                  <Box key={index}>
                     <StarsRating value={rate} />
-                    <p>{review}</p>
+                    <Typography>{review}</Typography>
                     <span>
                       <b>{reviewDate}</b>
                     </span>
@@ -62,12 +62,12 @@ const ProductDetails = () => {
                     <span>
                       <b>by: {userName}</b>
                     </span>
-                  </div>
+                  </Box>
                 );
               })}
             </>
           )}
-        </div>
+        </Box>
       </PaperSharp>
 
     </Container >

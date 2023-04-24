@@ -21,7 +21,10 @@ const LayoutAdmin: FC = (): JSX.Element => {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { md: `calc(100%  ${drawerWidth}px)` } }}
+        sx={{
+          flexGrow: 1, paddingTop: 2, paddingBottom: 2, overflowX: 'auto',
+          width: { md: `calc(100%  ${drawerWidth}px)` }
+        }}
       >
 
         <Toolbar />

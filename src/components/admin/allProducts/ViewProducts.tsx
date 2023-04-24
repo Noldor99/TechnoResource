@@ -5,7 +5,7 @@ import { db, storage } from "../../../firebase/config";
 import Notiflix from 'notiflix';
 import { deleteObject, ref } from "firebase/storage";
 import { useDispatch, useSelector } from "react-redux";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Container } from "@mui/material";
 import { selectProducts, STORE_PRODUCTS } from "../../../store/slice/productSlice";
 import useFetchCollection from "../../../customHooks/useFetchCollection";
 import ProductsTable from "./ProductsTable";
@@ -65,11 +65,11 @@ const ViewProducts = () => {
   };
 
   return (
-    <>
+    <Container>
       {isLoading && <CircularProgress />}
       <ProductsTable products={products} confirmDelete={confirmDelete} />
 
-    </>
+    </Container>
   );
 };
 

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { REMOVE_FROM_CART } from "../store/slice/cartSlice";
 import { BASE_URL } from "../URL";
+import LikeTurn from "./product/LikeTurn";
 
 const MenuCartMore = ({ id }: any) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,9 +29,6 @@ const MenuCartMore = ({ id }: any) => {
     setAnchorEl(null);
   }
 
-  const Likes = () => {
-    setAnchorEl(null);
-  };
   const Delete = () => {
     dispatch(REMOVE_FROM_CART({ id }))
     setAnchorEl(null);
@@ -65,11 +63,9 @@ const MenuCartMore = ({ id }: any) => {
           </IconButton>
           Learn More
         </MenuItem>
-        <MenuItem onClick={Likes}>
-          <IconButton>
-            <FavoriteIcon sx={{ mr: 1 }} />
-          </IconButton>
-          Likes
+        <MenuItem>
+          <LikeTurn id={id} />
+          Like
         </MenuItem>
         <MenuItem onClick={Delete}>
           <IconButton>

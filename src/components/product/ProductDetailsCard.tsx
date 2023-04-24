@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { IProduct } from '../../models/models'
 import BoxImg from '../styleComponents/BoxImg'
 import PaperRounding from '../styleComponents/containers/PaperRounding'
+import FlexBetween from '../styleComponents/FlexBetween'
 import TypographyTitle from '../styleComponents/TypographyTitle'
+import LikeTurn from './LikeTurn'
 import ProductCalculator from './ProductCalculator'
 
 
@@ -39,10 +41,13 @@ const ProductDetailsCard = ({ product }: ProductDetailsCardProps) => {
               </Typography>
 
             </Grid>
-            <Grid item >
-              <TypographyTitle color="text.secondary">
-                Prise:  {`$${product.price}`}
-              </TypographyTitle>
+            <Grid item xs={12}>
+              <FlexBetween>
+                <TypographyTitle color="text.secondary">
+                  Prise:  {`$${product.price}`}
+                </TypographyTitle>
+                <LikeTurn id={product.id} />
+              </FlexBetween>
             </Grid>
           </Grid>
           <Grid item container sx={{ paddingTop: 2 }} spacing={2}>
