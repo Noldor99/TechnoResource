@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
 import { toast } from "react-toastify";
 import React, { useState } from "react";
 import { Box, Button, Container, FormControl, TextField, Typography } from "@mui/material";
@@ -8,9 +8,11 @@ import ButtonBlueBack from "../../components/styleComponents/buttons/ButtonBlueB
 import { BASE_URL } from "../../URL";
 import PaperRounding from "../../components/styleComponents/containers/PaperRounding";
 import TextFieldForm from "../../components/styleComponents/TextFieldForm";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 
 const Register = () => {
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState<string>("+38");
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +29,17 @@ const Register = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+
+        // Create user document in Firestore
+        addDoc(collection(db, "users"), {
+          email: user.email,
+          phone: phone,
+          displayName: "User" + Math.floor(Math.random() * 1000),
+          photoURL: '',
+          role: 'user',
+          createdAt: Timestamp.now().toDate(),
+        });
+
         setIsLoading(false);
         toast.success("Registration Successful...");
         navigate(`${BASE_URL}/login`);
@@ -77,6 +89,18 @@ const Register = () => {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextFieldForm
+            margin="normal"
+            required
+            fullWidth
+            type='phone'
+            id="phone"
+            label="Phone number"
+            name="phone"
+            autoComplete="phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           />
           <TextFieldForm
             margin="normal"

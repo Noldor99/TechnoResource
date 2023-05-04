@@ -8,11 +8,12 @@ import {
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
+  fetchSignInMethodsForEmail,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup
 } from 'firebase/auth';
-import { auth } from '../../firebase/config';
+import { auth, db } from '../../firebase/config';
 import { toast } from 'react-toastify';
 // import { selectPreviousURL } from '../../store/slice/cartSlice';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -20,6 +21,8 @@ import ButtonBlueBack from '../../components/styleComponents/buttons/ButtonBlueB
 import { BASE_URL } from '../../URL';
 import PaperRounding from '../../components/styleComponents/containers/PaperRounding';
 import TextFieldForm from '../../components/styleComponents/TextFieldForm';
+import { collection, where, getDocs, query } from 'firebase/firestore';
+
 
 
 const LoginForm = () => {
@@ -59,16 +62,26 @@ const LoginForm = () => {
   // Login with Goooglr
   const provider = new GoogleAuthProvider();
   const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then(result => {
-        // const user = result.user;
-        toast.success('Login Successfully');
-        redirectUser();
-      })
-      .catch(error => {
-        toast.error(error.message);
-      });
+    const usersRef = collection(db, 'users');
+
+    const q = query(usersRef, where('email', '==', email));
+    getDocs(q).then((querySnapshot) => {
+      if (querySnapshot.empty) {
+        toast.error('User not found');
+      } else {
+        signInWithPopup(auth, provider)
+          .then(result => {
+            // const user = result.user;
+            toast.success('Login Successfully');
+            redirectUser();
+          })
+          .catch(error => {
+            toast.error(error.message);
+          });
+      }
+    });
   };
+
 
   return (
     <Container
