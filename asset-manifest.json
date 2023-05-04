@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/TechnoResource/static/css/main.9b2664a2.css",
-    "main.js": "/TechnoResource/static/js/main.df8ea93f.js",
+    "main.js": "/TechnoResource/static/js/main.8195caf7.js",
     "static/media/logo.svg": "/TechnoResource/static/media/logo.ceb1ff695d3e43fcc123111364ad579b.svg",
     "index.html": "/TechnoResource/index.html",
     "main.9b2664a2.css.map": "/TechnoResource/static/css/main.9b2664a2.css.map",
-    "main.df8ea93f.js.map": "/TechnoResource/static/js/main.df8ea93f.js.map"
+    "main.8195caf7.js.map": "/TechnoResource/static/js/main.8195caf7.js.map"
   },
   "entrypoints": [
     "static/css/main.9b2664a2.css",
-    "static/js/main.df8ea93f.js"
+    "static/js/main.8195caf7.js"
   ]
 }
