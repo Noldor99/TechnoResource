@@ -43,7 +43,7 @@ const Cart = () => {
 
 
   const checkout = () => {
-    if (isLoggedIn) {
+    if (isLoggedIn || undefined) {
       navigate(`${BASE_URL}/checkout-details`);
     } else {
       dispatch(SAVE_URL(url));
