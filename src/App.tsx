@@ -26,11 +26,13 @@ import ReviewProducts from './pages/order/ReviewProducts'
 
 function App() {
   const [theme, colorMode] = useMode()
+
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <CssBaseline>
 
+        <CssBaseline>
 
           <ToastContainer />
           <BackgroundGradient />
@@ -60,6 +62,7 @@ function App() {
             </Routes>
           </div>
         </CssBaseline>
+
       </ThemeProvider>
     </ColorModeContext.Provider>
   )
