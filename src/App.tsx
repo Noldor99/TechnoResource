@@ -31,12 +31,9 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-
         <CssBaseline>
-
           <ToastContainer />
           <BackgroundGradient />
-
           <div className="App">
             <Routes>
               <Route path={BASE_URL} element={<Layout />}>
